@@ -44,14 +44,14 @@ namespace MVCCrud.Controllers
                     using (DBShoppingEntities db = new DBShoppingEntities())
                     {
 
-                        var oTabla = new CSharp_Technical_Challenge.Models.Employee();
-                        oTabla.Name = model.Name;
-                        oTabla.Type = model.Type;
-                        oTabla.Telephone = model.Telephone;
-                        oTabla.Address = model.Address;
-                        oTabla.EmploymentDate = model.EmploymentDate;
+                        var table = new CSharp_Technical_Challenge.Models.Employee();
+                        table.Name = model.Name;
+                        table.Type = model.Type;
+                        table.Telephone = model.Telephone;
+                        table.Address = model.Address;
+                        table.EmploymentDate = model.EmploymentDate;
 
-                        db.Employee.Add(oTabla);
+                        db.Employee.Add(table);
                         db.SaveChanges();
 
                     }
@@ -74,13 +74,13 @@ namespace MVCCrud.Controllers
 
             using (DBShoppingEntities db = new DBShoppingEntities())
             {
-                var oTabla = db.Employee.Find(id);
-                model.ID = oTabla.ID;
-                model.Name = oTabla.Name;
-                model.Type = oTabla.Type;
-                model.Telephone = oTabla.Telephone;
-                model.Address = oTabla.Address;
-                model.EmploymentDate = (DateTime)oTabla.EmploymentDate;
+                var table = db.Employee.Find(id);
+                model.ID = table.ID;
+                model.Name = table.Name;
+                model.Type = table.Type;
+                model.Telephone = table.Telephone;
+                model.Address = table.Address;
+                model.EmploymentDate = (DateTime)table.EmploymentDate;
             }
             return View(model);
         }
@@ -95,14 +95,14 @@ namespace MVCCrud.Controllers
                     using (DBShoppingEntities db = new DBShoppingEntities())
                     {
 
-                        var oTabla = db.Employee.Find(model.ID);
-                        oTabla.Name = model.Name;
-                        oTabla.Type = model.Type;
-                        oTabla.Telephone = model.Telephone;
-                        oTabla.Address = model.Address;
-                        oTabla.EmploymentDate = model.EmploymentDate;
+                        var table = db.Employee.Find(model.ID);
+                        table.Name = model.Name;
+                        table.Type = model.Type;
+                        table.Telephone = model.Telephone;
+                        table.Address = model.Address;
+                        table.EmploymentDate = model.EmploymentDate;
 
-                        db.Entry(oTabla).State = System.Data.Entity.EntityState.Modified;
+                        db.Entry(table).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
 
                     }
@@ -124,9 +124,9 @@ namespace MVCCrud.Controllers
         {
             using (DBShoppingEntities db = new DBShoppingEntities())
             {
-                var oTabla = db.Employee.Find(Id);
+                var table = db.Employee.Find(Id);
 
-                db.Employee.Remove(oTabla);
+                db.Employee.Remove(table);
                 db.SaveChanges();
             }
             return Redirect("~/Employee/");
