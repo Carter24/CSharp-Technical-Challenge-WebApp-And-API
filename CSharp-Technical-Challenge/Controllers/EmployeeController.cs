@@ -36,37 +36,36 @@ namespace MVCCrud.Controllers
         [HttpPost]
         public ActionResult New(CSharp_Technical_Challenge.Models.ViewModels.Employee model)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-
-                    using (DBShoppingEntities db = new DBShoppingEntities())
+              if (ModelState.IsValid)
+              {
+                    try
                     {
 
-                        var table = new CSharp_Technical_Challenge.Models.Employee();
-                        table.Name = model.Name;
-                        table.Type = model.Type;
-                        table.Telephone = model.Telephone;
-                        table.Address = model.Address;
-                        table.EmploymentDate = model.EmploymentDate;
+                        using (DBShoppingEntities db = new DBShoppingEntities())
+                        {
 
-                        db.Employee.Add(table);
-                        db.SaveChanges();
+                            var table = new CSharp_Technical_Challenge.Models.Employee();
+                            table.Name = model.Name;
+                            table.Type = model.Type;
+                            table.Telephone = model.Telephone;
+                            table.Address = model.Address;
+                            table.EmploymentDate = model.EmploymentDate;
+
+                            db.Employee.Add(table);
+                            db.SaveChanges();
+
+                        }
+                        return Redirect("~/Employee/");
+                    }
+                     catch (Exception ex)
+                    {
+                        return Content("<script language='javascript' type='text/javascript'>alert('" + ex.Message + "');</script>");
 
                     }
 
-
-                    return Redirect("~/Employee/");
-                }
-
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+              }
+         return Redirect("~/Employee/");
+    }
 
         public ActionResult Edit(int id)
         {
@@ -87,36 +86,35 @@ namespace MVCCrud.Controllers
 
         [HttpPost]
         public ActionResult Edit(CSharp_Technical_Challenge.Models.ViewModels.Employee model)
-        {
-            try
-            {
+        {       
                 if (ModelState.IsValid)
                 {
-                    using (DBShoppingEntities db = new DBShoppingEntities())
+                    try
                     {
+                        using (DBShoppingEntities db = new DBShoppingEntities())
+                        {
 
-                        var table = db.Employee.Find(model.ID);
-                        table.Name = model.Name;
-                        table.Type = model.Type;
-                        table.Telephone = model.Telephone;
-                        table.Address = model.Address;
-                        table.EmploymentDate = model.EmploymentDate;
+                            var table = db.Employee.Find(model.ID);
+                            table.Name = model.Name;
+                            table.Type = model.Type;
+                            table.Telephone = model.Telephone;
+                            table.Address = model.Address;
+                            table.EmploymentDate = model.EmploymentDate;
 
-                        db.Entry(table).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
+                            db.Entry(table).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+
+                        }
+                        return Redirect("~/Employee/");
+                    }
+                    catch (Exception ex)
+                    {
+                        return Content("<script language='javascript' type='text/javascript'>alert('" + ex.Message + "');</script>");
 
                     }
-
-
-                    return Redirect("~/Employee/");
+                    
                 }
-
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return Redirect("~/Employee/");
         }
 
         [HttpGet]
