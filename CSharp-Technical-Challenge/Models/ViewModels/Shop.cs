@@ -25,5 +25,6 @@ namespace CSharp_Technical_Challenge.Models.ViewModels
         [StringLength(8)]
         [Display(Name = "Telephone")]
         public string Telephone { get; set; }
+        public DateTime ShopDate { get; set; }
     }
 }

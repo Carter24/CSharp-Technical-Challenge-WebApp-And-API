@@ -7,24 +7,26 @@ using CSharp_Technical_Cahellenge_WebAPI.Models;
 
 namespace CSharp_Technical_Cahellenge_WebAPI.Controllers
 {
-    public class EmployeeController : Controller
+    public class APIEmployeeController : Controller
     {
         // GET: Employee
         public dynamic Index()
         {
-            List<Employee> lst;
-            using (DBShoppingEntities db = new DBShoppingEntities())
-            {
-                lst = (from d in db.Employee
-                       select new Employee
-                       {
-                           ID = d.ID,
-                           Name = d.Name,
-                           Telephone = d.Telephone,
-                           EmploymentDate = (DateTime)d.EmploymentDate
-                       }).ToList();
-            }
-            return lst;
+            List<Employee> lst = new List<Employee>();
+             using (DBShoppingEntities db = new DBShoppingEntities())
+             {
+                 foreach (var table in db.Employee )                        
+                 {
+                     lst.Add(new Employee() { ID = table.ID, 
+                         Name = table.Name, 
+                         Type = table.Type, 
+                         Telephone = table.Telephone,
+                         Address = table.Address,
+                         EmploymentDate = table.EmploymentDate
+                     });
+                 }
+             }
+             return lst;
         }
 
         // GET: Employee/Details/5

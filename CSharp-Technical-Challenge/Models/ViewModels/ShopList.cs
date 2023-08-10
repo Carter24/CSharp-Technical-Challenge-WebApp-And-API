@@ -11,5 +11,9 @@ namespace CSharp_Technical_Challenge.Models.ViewModels
         public int ID { get; set; }
         public string Name { get; set; }
         public string Telephone { get; set; }
+
+        public int Id_Employee { get; set; }
+
+        public string Addres { get; set; }
     }
 }
